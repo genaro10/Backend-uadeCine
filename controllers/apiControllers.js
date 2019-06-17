@@ -1,7 +1,9 @@
 //codigo puro javaScript.
 var Contactos = require('../models/ContactoModel'); //import
-var Comentarios= require('../models/ComentarioModel');
-var bodyParser = require('body-parser');//
+
+
+var Contactos = require('../models/ContactoModel');
+var bodyParser = require('body-parser');
 
     
 let getContactos = (req, res) =>
@@ -19,7 +21,6 @@ let getContactos = (req, res) =>
         (err)=>{console.log(err);}
     )       
 };
-
 let getContactosById = (req, res) =>
 {      
     console.log("llegue a leer con filtro");
@@ -27,7 +28,7 @@ let getContactosById = (req, res) =>
     let idBusqueda = {dni: req.body.dniBuscado};
     console.log(idBusqueda);
     //Listar resultados
-    Contactos.find(idBusqueda)//select=find
+    Contactos.find(idBusqueda)
     .then
     (
         (listaContactos)=>
@@ -44,10 +45,11 @@ let insertContacto = (req,res) =>
     console.log(req.body);
     var newContacto = Contactos({
         nombre: req.body.nombre,
-        domicilio: req.body.domicilio,
-        cumple: req.body.cumple,
+        apellido: req.body.apellido,
+        idUsuario: req.body.idUsuario,
         dni: req.body.dni,
-        mail: req.body.mail
+        mail: req.body.mail,
+        contraseña: req.body.contraseña
     });
     newContacto.save().
     then
@@ -90,6 +92,9 @@ let deleteContacto = (req,res)=>
     )       
    
 }
+module.exports = {getContactos,insertContacto,updateContacto,deleteContacto,getContactosById};
+
+
  //+++++++++++++++++++++++++++++COMENTARIOS++++++++++++++++++++++++++++++++++++++++++++++++++++
 let getComentarios = (req, res) =>
 {      
