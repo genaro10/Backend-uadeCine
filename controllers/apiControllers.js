@@ -21,11 +21,11 @@ let getContactos = (req, res) =>
         (err)=>{console.log(err);}
     )       
 };
-let getContactosById = (req, res) =>
+let getContactosById= (req, res) =>
 {      
     console.log("llegue a leer con filtro");
     //Obtener id busqueda
-    let idBusqueda = {dni: req.body.dniBuscado};
+    let idBusqueda = {idUsuario: req.body.idUsuario,contraseña:req.body.contraseña};
     console.log(idBusqueda);
     //Listar resultados
     Contactos.find(idBusqueda)
@@ -38,15 +38,17 @@ let getContactosById = (req, res) =>
         },
         (err)=>{console.log(err);}
     )       
-};
+
+}
 
 let insertContacto = (req,res) =>
 {
     console.log(req.body);
     var newContacto = Contactos({
+        idUsuario:req.body.idUsuario,
         nombre: req.body.nombre,
         apellido: req.body.apellido,
-        idUsuario: req.body.idUsuario,
+        
         dni: req.body.dni,
         mail: req.body.mail,
         contraseña: req.body.contraseña
