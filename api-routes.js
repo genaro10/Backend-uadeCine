@@ -19,11 +19,22 @@ router.get('/leerContacto',function(req,res)
     console.log("leer");
     apiController.getContactos(req,res);
 });
+
+router.get('/leerComentario',function(req,res)
+{
+    console.log("leer");
+    apiController.getComentarios(req,res);
+});
 //EndPoint para leer con filtro
 router.post('/leerContacto/?idBusqueda',function(req,res)
 {
     console.log("leer con filtro");
     apiController.getContactosById(req,res);
+});
+router.post('/leerComentario/?idBusqueda',function(req,res)
+{
+    console.log("leer con filtro");
+    apiController.getComentariosByIdUasurio(req,res);
 });
 //EndPoint para insertar en la BD
 router.post('/insertarContacto/Contacto',function(req,res)
@@ -32,10 +43,21 @@ router.post('/insertarContacto/Contacto',function(req,res)
     apiController.insertContacto(req,res);
 });
 
+router.post('/insertarComentario/Comentario',function(req,res)
+{
+    console.log(req.body);
+    apiController.insertComentario(req,res);
+});
+
 //EndPoint para modificar en la BD
 router.post('/modificarContacto/Contacto',function(req,res)
 {
     apiController.updateContacto(req,res);
+});
+
+router.post('/modificarComentario/Comentario',function(req,res)
+{
+    apiController.updateComentario(req,res);
 });
 
 //EndPoint para eliminar en la BD

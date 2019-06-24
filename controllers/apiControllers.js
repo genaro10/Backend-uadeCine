@@ -1,8 +1,8 @@
 //codigo puro javaScript.
 var Contactos = require('../models/ContactoModel'); //import
+var Comentarios=require('../models/ComentarioModel')
 
 
-var Contactos = require('../models/ContactoModel');
 var bodyParser = require('body-parser');
 
     
@@ -118,7 +118,7 @@ let getComentariosByIdUasurio = (req, res) =>
 {      
     console.log("Leer comentarios con filtro de usuarios");
     //Obtener id busqueda
-    let idUasurioBusqueda = {idUsuario: req.body.usrBuscado};
+    let idUasurioBusqueda = {idUsuario: req.body.idUsuario};
     console.log(idUasurioBusqueda);
     //Listar resultados
     Comentarios.find(idUasurioBusqueda)//select=find
@@ -138,10 +138,10 @@ let insertComentario = (req,res) =>
 {
     console.log(req.body);
 
-    var newComentario = Comentario({
+    var newComentario = Comentarios({
         idUsuario: req.body.idUsuario,
         idPelicula: req.body.idPelicula,
-        idComentario:req.body.idComentario,
+        calificacion:req.body.calificacion,
         comentario: req.body.comentario,
       
     });
