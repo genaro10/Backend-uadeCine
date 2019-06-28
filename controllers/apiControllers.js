@@ -3,6 +3,7 @@ var Contactos = require('../models/ContactoModel'); //import
 var Comentarios=require('../models/ComentarioModel')
 
 
+
 var bodyParser = require('body-parser');
 
     
@@ -37,7 +38,8 @@ let getContactosById= (req, res) =>
             console.log(listaContactos);    
         },
         (err)=>{console.log(err);}
-    )       
+    ) 
+      
 
 }
 
@@ -53,15 +55,25 @@ let insertContacto = (req,res) =>
         mail: req.body.mail,
         contraseña: req.body.contraseña
     });
-    newContacto.save().
-    then
-    (
-        (newContacto)=>
-        {
-            res.send(newContacto); //devuelvo resultado query       
-        },
-        (err)=>{console.log(err);}
-    ) 
+    Contactos.findOne({
+        idUsuario:req.body.idUsuario
+    })
+        .then(usuario=>{
+            if(!usuario){
+                Contactos.create(newContacto)
+                    .then(user=>{
+                        res.json("registrado")
+                    })
+                    .catch(err=>{
+                        res.json("Usuario ya existe!")
+                    })
+            }else{
+                res.json("ya existe el usuario")
+            }
+        })
+    .catch(err=>{
+        res.json("error")
+    })
 }
 let updateContacto = (req,res) => 
 {
