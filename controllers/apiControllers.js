@@ -35,7 +35,8 @@ let getContactosById= (req, res) =>
         (listaContactos)=>
         {
             res.send(listaContactos); //devuelvo resultado query   
-            console.log(listaContactos);    
+            console.log(listaContactos); 
+            
         },
         (err)=>{console.log(err);}
     ) 
@@ -126,6 +127,24 @@ let getComentarios = (req, res) =>
     )       
 };
 
+let deleteComentario = (req,res)=>
+{
+    let id = { idUsuario : req.body.idUsuario,idPelicula:req.body.idPelicula,calificacion:req.body.calificacion};
+  
+    Comentarios.deleteOne(id)
+    
+    .then
+    (
+        (resultado)=>
+        {
+            res.send(resultado);
+             //devuelvo resultado        
+        },
+        (err)=>{console.log(err);}
+    )      
+   
+}
+
 let getComentariosByIdUasurio = (req, res) =>
 {      
     console.log("Leer comentarios con filtro de usuarios");
@@ -141,7 +160,7 @@ let getComentariosByIdUasurio = (req, res) =>
             res.send(listaComentarios); //devuelvo resultado query   
             console.log(listaComentarios);    
         },
-        (err)=>{console.log(err);}
+        (err)=>{console.log(err," ERROR");}
     )       
 };
 
@@ -186,5 +205,5 @@ let updateComentario = (req, res) =>
 }
 //++++++++++++++++++++++Guardar puntuacion++++++++++++++++++++++++
 
-module.exports = {getContactos,insertContacto,updateContacto,deleteContacto,getContactosById,getComentarios,getComentariosByIdUasurio,insertComentario,updateComentario};
+module.exports = {deleteComentario,getContactos,insertContacto,updateContacto,deleteContacto,getContactosById,getComentarios,getComentariosByIdUasurio,insertComentario,updateComentario};
 

@@ -65,5 +65,9 @@ router.delete('/borrarContacto/Contacto',function(req,res)
 {
     apiController.deleteContacto(req,res);
 });
+router.delete('/borrarComentario/Comentario',function(req,res)
+{
+    apiController.deleteComentario(req,res);
+});
 // Export API routes
 module.exports = router;
