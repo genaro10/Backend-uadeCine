@@ -36,6 +36,16 @@ router.post('/leerComentario/?idBusqueda',function(req,res)
     console.log("leer con filtro");
     apiController.getComentariosByIdUasurio(req,res);
 });
+router.post('/leerComentario/?idBusquedaa',function(req,res)
+{
+    console.log("leer con filtro");
+    apiController.getComentariosDelUsuario(req,res);
+});
+router.post('/leerComentario/?idBusquedaUsuarioComunidad',function(req,res)
+{
+    console.log("leer con filtro");
+    apiController.getComentariosDelUsuarioComunidad(req,res);
+});
 //EndPoint para insertar en la BD
 router.post('/insertarContacto/Contacto',function(req,res)
 {

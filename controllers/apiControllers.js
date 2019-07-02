@@ -164,6 +164,48 @@ let getComentariosByIdUasurio = (req, res) =>
     )       
 };
 
+let getComentariosDelUsuario = (req, res) =>
+{      
+    console.log("Leer comentarios con filtro de usuarios");
+    //Obtener id busqueda
+    let idUasurioBusqueda = {idUsuario:req.body.idUsuario,
+    idPelicula:req.body.idPelicula};
+    console.log(idUasurioBusqueda);
+    //Listar resultados
+    Comentarios.find({idUsuario:req.body.idUsuario,
+    idPelicula:new RegExp( req.body.idPelicula)})//select=find
+    .then
+    (
+        (listaComentarios)=>
+        {
+            res.send(listaComentarios); //devuelvo resultado query   
+            console.log(listaComentarios);    
+        },
+        (err)=>{console.log(err," ERROR");}
+    )       
+};
+
+let getComentariosDelUsuarioComunidad = (req, res) =>
+{      
+    console.log("Leer comentarios con filtro de usuarios");
+    //Obtener id busqueda
+    let idUasurioBusqueda = {
+    idPelicula:req.body.idPelicula};
+    console.log(idUasurioBusqueda);
+    //Listar resultados
+    Comentarios.find({
+    idPelicula:new RegExp( req.body.idPelicula)})//select=find
+    .then
+    (
+        (listaComentarios)=>
+        {
+            res.send(listaComentarios); //devuelvo resultado query   
+            console.log(listaComentarios);    
+        },
+        (err)=>{console.log(err," ERROR");}
+    )       
+};
+
 
 let insertComentario = (req,res) =>
 {
@@ -205,5 +247,5 @@ let updateComentario = (req, res) =>
 }
 //++++++++++++++++++++++Guardar puntuacion++++++++++++++++++++++++
 
-module.exports = {deleteComentario,getContactos,insertContacto,updateContacto,deleteContacto,getContactosById,getComentarios,getComentariosByIdUasurio,insertComentario,updateComentario};
+module.exports = {getComentariosDelUsuarioComunidad,getComentariosDelUsuario,deleteComentario,getContactos,insertContacto,updateContacto,deleteContacto,getContactosById,getComentarios,getComentariosByIdUasurio,insertComentario,updateComentario};
 
